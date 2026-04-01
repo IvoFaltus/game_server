@@ -1,0 +1,10 @@
+```json
+{"msg":"Write a function in Python that takes a list of integers and returns a new list with only the even numbers from the original list."}
+```
+{'msg':'Write a function to reverse a string in Python.'}
+{'msg':'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.'}
+{'msg':'Write a function that returns the sum of two numbers.'}
+{"msg": "Write a function that returns the largest number in a given list of integers."}
+{"msg": "Write a function that reverses a string."}
+{"msg": "Write a function that returns the sum of all even numbers in a given list."}
+{"msg": "Write a function that returns the largest number in a given list of integers."}
