@@ -8,3 +8,4 @@
 {"msg": "Write a function that reverses a string."}
 {"msg": "Write a function that returns the sum of all even numbers in a given list."}
 {"msg": "Write a function that returns the largest number in a given list of integers."}
+{"msg": "Write a function that returns the largest number in a given list of integers."}
