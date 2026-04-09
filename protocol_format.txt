@@ -1,0 +1,23 @@
+[
+  { "type": "HOST", "lobby": "frajeri" },
+  { "type": "HOST_OK" },
+
+  { "type": "JOIN", "lobby": "frajeri" },
+  { "type": "JOIN_OK" },
+
+  { "type": "PLAYER_JOINED", "count": 2 },
+
+  { "type": "START" },
+
+  { "type": "TASK_DONE" },
+
+  { "type": "SCORE", "playerId": 1, "score": 3 },
+
+  { "type": "WINNER", "playerId": 1 },
+
+  { "type": "RESET" },
+
+  { "type": "LEAVE" },
+
+  { "type": "PLAYER_LEFT" }
+]
