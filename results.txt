@@ -9,3 +9,5 @@
 {"msg": "Write a function that returns the sum of all even numbers in a given list."}
 {"msg": "Write a function that returns the largest number in a given list of integers."}
 {"msg": "Write a function that returns the largest number in a given list of integers."}
+
+prosim spravne napoj funkce kdyz uzivatel zada host game tak zaloz thread safely session kde jmeno bude nazev session a jako host te session se nastavi objekt toho hrace {"1":{"username":"xx","addr":addr}} a automaticky ho to da i do players pokusil jsem se na ot udelat funkce v unityapi.py pridani session a pridani uzivatele tak oprav ty moje metody pokud potreba a pouzij je, a pokud uzivatel zada join tak ho pride do session podle jmena co zada a kazdy hrac bude mit ve svem threadu promennou session aby se veddelo jaky hrac je v jake session a take bude mit promennou playerobj a to bude to co vytvori tam metoda z unityapi.py createuser
