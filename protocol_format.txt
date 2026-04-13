@@ -1,9 +1,26 @@
 [
-  { "type": "HOST", "lobby": "frajeri" },
+  { "type": "HOST", "lobby": "frajeri", "name": "ivo", "maxPlayers": 4, "maxScore": 3 },
   { "type": "HOST_OK" },
 
   { "type": "JOIN", "lobby": "frajeri" },
   { "type": "JOIN_OK" },
+  { "type": "JOIN_ERROR", "reason": "SESSION_FULL", "count": 4, "maxPlayers": 4 },
+  { "type": "JOIN_ERROR", "reason": "USERNAME_TAKEN", "name": "ivo" },
+
+  { "type": "STARTPREGAME" },
+  { "type": "STARTPREGAME_OK", "state": "PREGAMELOBBY" },
+
+  { "type": "ADDTOPIC", "topic": "python" },
+  { "type": "ADDTOPIC_OK", "topic": "python", "count": 1 },
+
+  { "type": "START" },
+  { "type": "START_OK", "state": "INGAME", "questions": 13 },
+
+  { "type": "ANSWER", "answer": 5 },
+  { "type": "ANSWER_OK", "answer": 5, "correct": true, "score": 1, "nextQuestion": 2 },
+  { "type": "WINNER", "username": "ivo", "maxScore": 3 },
+
+  { "type": "SESSION_TERMINATED", "lobby": "frajeri", "reason": "DISCONNECT" },
 
   { "type": "PLAYER_JOINED", "count": 2 },
 

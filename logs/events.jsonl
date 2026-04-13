@@ -1,0 +1,6 @@
+{"ts": "2026-04-13T14:45:05.632055+00:00", "event": "SOCKET_ACCEPTED", "thread": "MainThread", "payload": {"addr": "127.0.0.1:50141"}}
+{"ts": "2026-04-13T14:45:05.637552+00:00", "event": "CLIENT_CONNECTED", "thread": "Client-('127.0.0.1', 50141)", "payload": {"playerid": "127.0.0.1:50141", "addr": "127.0.0.1:50141"}}
+{"ts": "2026-04-13T14:45:05.638014+00:00", "event": "PLAYER_REGISTERED", "thread": "Client-('127.0.0.1', 50141)", "payload": {"playerid": "127.0.0.1:50141", "addr": "127.0.0.1:50141"}}
+{"ts": "2026-04-13T14:45:16.640105+00:00", "event": "USER_CREATED", "thread": "Client-('127.0.0.1', 50141)", "payload": {"playerid": "127.0.0.1:50141", "user": {"username": "majitel", "addr": "127.0.0.1:50141"}}}
+{"ts": "2026-04-13T14:45:16.645369+00:00", "event": "SESSION_CREATED", "thread": "Client-('127.0.0.1', 50141)", "payload": {"session": "lobicko", "host": {"username": "majitel", "addr": "127.0.0.1:50141"}}}
+{"ts": "2026-04-13T14:45:16.650518+00:00", "event": "HOST_OK", "thread": "Client-('127.0.0.1', 50141)", "payload": {"playerid": "127.0.0.1:50141", "session": "lobicko", "user": {"username": "majitel", "addr": "127.0.0.1:50141"}}}

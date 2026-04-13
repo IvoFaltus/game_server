@@ -63,6 +63,34 @@ def get_question_and_answers(topic,passwd):
     print(response.status_code)
     data = response.json()
     return json.loads(data["output"][0]["content"][0]["text"])
+
+
+def get_question_and_answers_5(topic, passwd):
+    res = requests.post(
+        "http://bestapi.cz:5555/getApiKey",
+        headers={"Authorization": f"Bearer {passwd}"},
+    )
+    apikey = res.json()["apiKey"]
+
+    response = requests.post(
+        url,
+        headers={
+            "Authorization": f"Bearer {apikey}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": "gpt-4.1",
+            "input": (
+                "Return ONLY valid JSON with this format: {\"msg\": \"...\", \"1\": \"...\", \"2\": \"...\", "
+                "\"3\": \"...\", \"4\": \"...\", \"5\": \"...\"}. "
+                f"The topic of question is {topic}. "
+                "The option with key \"5\" MUST be the correct answer, and keys \"1\"-\"4\" MUST be incorrect but plausible."
+            ),
+        },
+    )
+
+    data = response.json()
+    return json.loads(data["output"][0]["content"][0]["text"])
     
     
     

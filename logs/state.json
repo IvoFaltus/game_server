@@ -1,0 +1,48 @@
+{
+  "ts": "2026-04-13T14:45:16.651051+00:00",
+  "reason": "host_ok",
+  "users": {
+    "127.0.0.1:50141": {
+      "username": "majitel",
+      "addr": "127.0.0.1:50141"
+    }
+  },
+  "sessions": {
+    "lobicko": {
+      "players": [
+        {
+          "username": "majitel",
+          "addr": "127.0.0.1:50141"
+        }
+      ],
+      "host": {
+        "username": "majitel",
+        "addr": "127.0.0.1:50141"
+      },
+      "host_playerid": "127.0.0.1:50141",
+      "scores": {
+        "127.0.0.1:50141": 0
+      },
+      "question": {},
+      "topics": [],
+      "topics_by_player": {},
+      "questions": [],
+      "max_players": 2,
+      "max_score": 20,
+      "state": "LOBBY",
+      "player_current_question": {
+        "127.0.0.1:50141": 0
+      }
+    }
+  },
+  "players": {
+    "127.0.0.1:50141": {
+      "sessionId": "lobicko",
+      "addr": "127.0.0.1:50141",
+      "playerobj": {
+        "username": "majitel",
+        "addr": "127.0.0.1:50141"
+      }
+    }
+  }
+}

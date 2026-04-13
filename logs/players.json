@@ -1,0 +1,14 @@
+{
+  "ts": "2026-04-13T14:45:16.651051+00:00",
+  "reason": "host_ok",
+  "players": {
+    "127.0.0.1:50141": {
+      "sessionId": "lobicko",
+      "addr": "127.0.0.1:50141",
+      "playerobj": {
+        "username": "majitel",
+        "addr": "127.0.0.1:50141"
+      }
+    }
+  }
+}

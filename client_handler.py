@@ -1,13 +1,21 @@
 import random
 import threading
+import json
 
 from colorama import Fore, Style
 from development_translator import translate
 
 from api import get_question_and_answers
-from unityapi import receive_msg, register_player
+from unityapi import (
+    receive_msg,
+    register_player,
+    set_api_password,
+    register_connection,
+    unregister_connection,
+    handle_client_disconnect,
+)
+from json_logger import log_event, write_state_snapshot
 
-import server
 print_lock = threading.Lock()
 
 
@@ -32,8 +40,12 @@ def _send_welcome(conn):
     conn.sendall(
         b"\n[CONNECTED]\n"
         b"Commands:\n"
-        b"  host <lobby_name> <you_name>  -> create lobby\n"
+        b"  host <lobby_name> <you_name> <max_players 1-20> <max_score 1-999> -> create lobby\n"
         b"  join <lobby_name> <your_name>  -> join lobby\n"
+        b"  startpregame        -> host starts pregame (requires full lobby)\n"
+        b"  start               -> in pregame: generate (maxScore+10) questions + start game\n"
+        b"  addtopic <topic>    -> add topic in pregame (0-3 per player)\n"
+        b"  answer <1|2|3|4|5>  -> answer question (5 is correct)\n"
         b"  solo                -> play alone\n"
         b"\n> "
     )
@@ -55,13 +67,15 @@ def _get_player_id(addr):
     return f"{addr[0]}:{addr[1]}"
 
 
-def _handle_unity_message(raw_msg, player_id, cprint):
+def _handle_unity_message(raw_msg, player_id, conn, cprint):
     translated = translate(raw_msg)
     if not translated:
         return
 
     cprint(f"Translated: {translated}")
-    receive_msg(translated, player_id)
+    response = receive_msg(translated, player_id)
+    if response is not None:
+        conn.sendall((json.dumps(response, ensure_ascii=False) + "\n> ").encode("utf-8"))
 
 
 def _build_question_response(question, a1, a2, a3):
@@ -120,27 +134,45 @@ def _handle_answer(answer, conn, state, cprint):
 
 def handle_client_async(conn, addr, password):
     cprint = _make_cprint(addr)
-    state = {"asked": False, "a1": None, "a2": None, "a3": None, "q": None}
+
+
+    state = "notconnected"
+    player = {}
+
+
     player_id = _get_player_id(addr)
+    log_event("CLIENT_CONNECTED", playerid=player_id, addr=f"{addr[0]}:{addr[1]}")
     register_player(player_id, addr)
+    register_connection(player_id, conn)
+    set_api_password(password)
+    write_state_snapshot("client_connected")
 
     _send_welcome(conn)
 
     buffer = b""
 
-    while True:
-        data = conn.recv(1024)
+    try:
+        while True:
+            data = conn.recv(1024)
 
-        if not data:
-            cprint("Client disconnected")
-            break
+            if not data:
+                cprint("Client disconnected")
+                log_event("CLIENT_DISCONNECTED", playerid=player_id, addr=f"{addr[0]}:{addr[1]}")
+                write_state_snapshot("client_disconnected")
+                handle_client_disconnect(player_id, reason="DISCONNECT")
+                break
 
-        buffer, lines = _read_lines(buffer, data)
+            buffer, lines = _read_lines(buffer, data)
 
-        for line in lines:
-            received = line.decode()
-            cprint(f"Received: {received}")
+            for line in lines:
+                received = line.decode()
+                cprint(f"Received: {received}")
 
-            _handle_unity_message(received, player_id, cprint)
-
-    conn.close()
+                _handle_unity_message(received, player_id, conn, cprint)
+    finally:
+        handle_client_disconnect(player_id, reason="DISCONNECT")
+        unregister_connection(player_id)
+        try:
+            conn.close()
+        except Exception:
+            pass
